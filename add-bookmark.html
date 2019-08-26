@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <title>Bookmarks App</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <button id="add-bookmark">Add bookmark</button>
+        <form>
+          <label for="title">Enter bookmark name</label>
+          <input type="text" id="title">
+          <label for="url">Enter url</label>
+          <input type="text" id="url">
+          <label for="description">Description</label>
+          <input type="text" id="description">
+          <fieldset>Rating
+            <input type="radio" name="rating1" value="1">
+            <input type="radio" value="2">
+            <input type="radio" value="3">
+            <input type="radio" value="4">
+          <input type="radio" value="5">
+          </fieldset>
+          <input type="submit" value="Save bookmark">
+        </form>
+        <section>
+            <h1>My bookmarks</h1>
+            <ul class="js-bookmarks-list">
+                <li><a href="#">Easy permutations</a><span>rating 5</span></li>
+                <li><a href="#">Harry Potter Trivia Quiz</a><span>rating 3</span></li>
+                <li><a href="#">How to bake a cake</a><span>rating 4</span></li>
+            </ul>
+        </section>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+        <script src="index.js" async defer></script>
+    </body>
+</html>
