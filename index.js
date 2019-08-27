@@ -11,6 +11,5 @@ $(document).ready(function() {
       items.forEach((item) => store.addBookmark(item));
       
     });
-  // .catch(err => console.log(err.message));
 });
 

@@ -5,12 +5,16 @@
         <title>Bookmarks App</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <button id="add-bookmark">Add bookmark</button>
-        <section>
+          <section class='container'>
+            <button id="add-bookmark">Add bookmark</button>
+            <div class="error-container"></div>
             <h1>My bookmarks</h1>
+            <label for="filter-item">Choose rating:
             <select id="filter-item">
                 <option>ALL</option>
                 <option>1</option>
@@ -18,32 +22,9 @@
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
-            </select>
-            <ul class="js-bookmarks-list"></ul>
-        </section>
-        <p>const store = {
-                list: [
-                  { 
-                    id: 1, 
-                    title: 'Article on Cats',
-                    url: 'http://www.cats.com',
-                    description: "Cats are great. I love cats.",
-                    rating: 5, 
-                    expanded: false 
-                  },
-                  { 
-                    id: 2, 
-                    title: 'Article on Dogs',
-                    url: 'http://www.dogs.com',
-                    description: "Dogs are great. I love dogs.",
-                    rating: 3, 
-                    expanded: false 
-                  }
-                ],
-                adding: false,
-                showError: false
-              }
-              </p>
+            </select></label>
+            <ul class="js-bookmarks-list bookmarks-list"></ul>
+          </section>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
         <script src="bookmarks.js"></script>

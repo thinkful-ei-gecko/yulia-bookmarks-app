@@ -1,8 +1,12 @@
 'use strict';
 
-/*global store, bookmarks */
+/*global bookmarks */
 
 const store = (function(){
+  const setError = function(error) {
+    this.error = error;
+  };
+
   const addBookmark = function(item) {
     this.list.push(item);
     bookmarks.render();
@@ -19,29 +23,13 @@ const store = (function(){
   };
   
   return {
-    list: [
-      { 
-        id: 1, 
-        title: 'Article on Cats',
-        url: 'http://www.cats.com',
-        description: 'Cats are great. I love cats.',
-        rating: 5, 
-        expanded: false 
-      },
-      { 
-        id: 2, 
-        title: 'Article on Dogs',
-        url: 'http://www.dogs.com',
-        description: 'Dogs are great. I love dogs.',
-        rating: 3, 
-        expanded: false 
-      }
-    ],
+    list: [],
     showError: '',
     filtered: 'ALL',
 
     addBookmark,
     findAndDelete,
+    setError,
   };
   
 }());

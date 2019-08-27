@@ -4,20 +4,40 @@
 
 const bookmarks = (function(){
 
+  function generateError(message) {
+    return `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
+    `;
+  }
+
   function generateBookmarkElement(item) {
     if (!item.rating) {
-      return `<li class="js-bookmark-item" data-bookmark-id="${item.id}">${item.title}<span>Not rated</span>
+      return `<li class="js-bookmark-item bookmark-item" data-bookmark-id="${item.id}"><span class="title">${item.title}</span>
+      <span class="rating">Not rated</span>
       <p class="js-desc hidden">${item.desc}<a href="${item.url}" class="js-visit">Visit Site</a></p>
-    <button class="delete-button">Delete</button><button>Edit</button><button class="expand">Show more</button></li>`;
+      <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
     }
-    return `<li class="js-bookmark-item" data-bookmark-id="${item.id}">${item.title}<span>${item.rating}</span>
-    <p  class="js-desc hidden">${item.desc}><a href="${item.url}" class="js-visit">Visit Site</a></p>
-    <button class="delete-button">Delete</button><button>Edit</button><button class="expand">Show more</button></li>`;
+    return `<li class="js-bookmark-item bookmark-item" data-bookmark-id="${item.id}"><span class="title">${item.title}</span>
+    <span class="rating">${item.rating}</span>
+    <p  class="js-desc hidden">${item.desc}><a href="${item.url}" target="_blank" class="js-visit">Visit Site</a></p>
+    <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
   }
 
   function generateBookmarkList(bookmarks) {
     const items = bookmarks.map((item) => generateBookmarkElement(item));
     return items.join('');
+  }
+
+  function renderError() {
+    if (store.error) {
+      const el = generateError(store.error);
+      $('.error-container').html(el);
+    } else {
+      $('.error-container').empty();
+    }
   }
 
   function render() {
@@ -36,20 +56,26 @@ const bookmarks = (function(){
   
   function renderForm() {
     $('#add-bookmark').hide();
-    $('body').prepend(`
+    $('.container').prepend(`
     <form id="js-form">
-      <label for="title">Enter bookmark name</label>
-      <input type="text" id="title" name="title">
+      <label for="title">Enter bookmark title</label>
+      <input type="text" id="title" name="title" required>
       <label for="url">Enter url</label>
-      <input type="text" id="url" name="url">
+      <input type="text" id="url" name="url" required>
       <label for="description">Description</label>
-      <input type="text" id="description" name="desc">
-      <fieldset>Rating
-        <input type="radio" name="rating" value="1">
-        <input type="radio" name="rating" value="2">
-        <input type="radio" name="rating" value="3">
-        <input type="radio" name="rating" value="4">
-        <input type="radio" name="rating" value="5">
+      <textarea id="description" name="desc" form="js-form"></textarea>
+      <legend>Rating</legend>
+      <fieldset>
+        <label for="rating1"><label>
+        <input type="radio" class="fa fa-star" id="rating1" name="rating" value="1">
+        <label for="rating2"><label>
+        <input type="radio" class="fa fa-star" id="rating2" name="rating" value="2">
+        <label for="rating3"><label>
+        <input type="radio" class="fa fa-star" id="rating3" name="rating" value="3">
+        <label for="rating4"><label>
+        <input type="radio" class="fa fa-star" id="rating4" name="rating" value="4">
+        <label for="rating5"><label>
+        <input type="radio" class="fa fa-star" id="rating5" name="rating" value="5">
       </fieldset>
       <input type="submit" value="Save bookmark">
     </form>
@@ -79,8 +105,11 @@ const bookmarks = (function(){
         store.addBookmark(result);
         render();
         removeForm();
-      });
-      console.log(o);
+      })
+        .catch((err) => {
+          store.setError(err.message);
+          renderError();
+        });
     });
   }
 
@@ -97,7 +126,12 @@ const bookmarks = (function(){
       api.deleteBookmark(id).then(() => {
         store.findAndDelete(id);
         render();
-      });
+      })
+        .catch((err) => {
+          console.log(err);
+          store.setError(err.message);
+          renderError();
+        });
     });
   }
 
@@ -116,12 +150,20 @@ const bookmarks = (function(){
     });
   }
 
+  function handleCloseError() {
+    $('.error-container').on('click', '#cancel-error', () => {
+      store.setError(null);
+      renderError();
+    });
+  }
+
   function bindEventListeners() {
     handleAddNewBookmark();
     bindFormSubmit();
     handleDelete();
     handleFilter();
     handleExpandedView();
+    handleCloseError();
   }
 
   

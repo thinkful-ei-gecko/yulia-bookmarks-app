@@ -1,3 +1,119 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    margin: 5%;
+    font-size: 120%;
+}
+
+#add-bookmark {
+    width: 50%;
+    background-color:  #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+}
+
+input[type=text], textarea, fieldset {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+  
+/* input[type=radio].fa {
+    font-size: 120%;
+    color: #8b8f94;
+    margin: 5%;
+} */
+
+h1 {
+    text-align: center;
+}
+
+label[for=filter-item] {
+    width: 10%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+  }
+
+button:hover {
+    cursor: pointer;
+}
+
 .hidden {
-    display: none
+    display: none;
+}
+
+/* .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+} */
+
+.bookmark-item {
+    width: 90%;
+    border: 1px solid #4CAF50;
+    background-color: white;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border-radius: 4px;
+}
+
+.bookmarks-list {
+    list-style: none;
+}
+.delete-button, .expand {
+    width: 100px;
+    /* background-color:  #4CAF50;
+    color: white; */
+    padding: 14px 20px;
+    margin: 8px 10px;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+}
+span {
+    display: block;
+}
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+    .bookmark-item {
+        width: 80%;
+}
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+    .bookmark-item {
+        width: 50%;
+    }
+    .delete-button, .expand {
+        width: 20%;
+    }
 }
