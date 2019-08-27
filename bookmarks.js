@@ -16,13 +16,13 @@ const bookmarks = (function(){
   function generateBookmarkElement(item) {
     if (!item.rating) {
       return `<li class="js-bookmark-item bookmark-item" data-bookmark-id="${item.id}"><span class="title">${item.title}</span>
-      <span class="rating">Not rated</span>
+      <span class="rating">This bookmark is not rated</span>
       <p class="js-desc hidden">${item.desc}<a href="${item.url}" class="js-visit">Visit Site</a></p>
       <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
     }
     return `<li class="js-bookmark-item bookmark-item" data-bookmark-id="${item.id}"><span class="title">${item.title}</span>
-    <span class="rating">${item.rating}</span>
-    <p  class="js-desc hidden">${item.desc}><a href="${item.url}" target="_blank" class="js-visit">Visit Site</a></p>
+    <span class="rating">Rating is ${item.rating} out of 5</span>
+    <p  class="js-desc hidden">${item.desc}<a href="${item.url}" target="_blank" class="js-visit">Visit Site</a></p>
     <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
   }
 
