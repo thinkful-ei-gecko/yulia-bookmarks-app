@@ -14,8 +14,10 @@ const store = (function(){
   //   const bookmark = this.findById(id);
   //   Object.assign(bookmark, newData);
   // };
-  bookmarks.handleAddNewBookmark();
-  bookmarks.handleFormSubmit();
+  const findAndDelete = function(id) {
+    this.list = this.list.filter(item => item.id !== id);
+  };
+  
   return {
     list: [
       { 
@@ -35,11 +37,11 @@ const store = (function(){
         expanded: false 
       }
     ],
-    adding: false,
     showError: '',
-    filtered: 1,
+    filtered: 'ALL',
 
     addBookmark,
+    findAndDelete,
   };
   
 }());

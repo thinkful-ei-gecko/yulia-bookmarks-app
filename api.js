@@ -43,10 +43,17 @@ const api = (function(){
         'Content-Type': 'application/json'
       },
       body: data
+    }).then(res => res.json());
+  };
+
+  const deleteBookmark = function(id) {
+    return fetch(`${base_url}/${id}`, {
+      method: 'DELETE',
     });
   };
   return {
     getBookmarks,
     createBookmark,
+    deleteBookmark
   };
 }());
