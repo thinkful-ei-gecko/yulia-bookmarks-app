@@ -15,6 +15,7 @@ const store = (function(){
   //   Object.assign(bookmark, newData);
   // };
   bookmarks.handleAddNewBookmark();
+  bookmarks.handleFormSubmit();
   return {
     list: [
       { 

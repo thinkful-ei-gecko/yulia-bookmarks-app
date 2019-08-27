@@ -1,5 +1,7 @@
 'use strict';
 
+/* global bookmarks */
+
 const api = (function(){
   const base_url = 'https://thinkful-list-api.herokuapp.com/yulia/bookmarks';
   // //fetch for each method, accepts url and object with params
@@ -34,14 +36,13 @@ const api = (function(){
      
   };
 
-  const createBookmark = function(obj) {
-    const newBookmark = JSON.stringify(obj);
+  const createBookmark = function(data) {
     return fetch(base_url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: newBookmark
+      body: data
     });
   };
   return {

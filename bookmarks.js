@@ -1,6 +1,6 @@
 'use strict';
 
-/*global store, */
+/*global store, api */
 
 const bookmarks = (function(){
 
@@ -31,26 +31,26 @@ const bookmarks = (function(){
   }
   
   function renderForm() {
+    $('#add-bookmark').hide();
     $('body').prepend(`
-    <form>
+    <form id="js-form">
       <label for="title">Enter bookmark name</label>
-      <input type="text" id="title">
+      <input type="text" id="title" name="title">
       <label for="url">Enter url</label>
-      <input type="text" id="url">
+      <input type="text" id="url" name="url">
       <label for="description">Description</label>
-      <input type="text" id="description">
+      <input type="text" id="description" name="desc">
       <fieldset>Rating
-        <input type="radio" name="rating1" value="1">
-        <input type="radio" value="2">
-        <input type="radio" value="3">
-        <input type="radio" value="4">
-        <input type="radio" value="5">
+        <input type="radio" name="1" value="1">
+        <input type="radio" name="2" value="2">
+        <input type="radio" name="3" value="3">
+        <input type="radio" name="4" value="4">
+        <input type="radio" name="5" value="5">
       </fieldset>
       <input type="submit" value="Save bookmark">
     </form>
   `);
   }
-
 
   function handleAddNewBookmark() {
     $('#add-bookmark').on('click', function(){
@@ -58,12 +58,23 @@ const bookmarks = (function(){
     });
   }
 
-  function onSubmitForm() {
+
+  function handleFormSubmit() {
+    $('body').on('submit', '#js-form', function(event){
+      event.preventDefault();
+      const formData = new FormData(this);
+      const o = {};
+      formData.forEach((val, name) => o[name] = val);
+      api.createBookmark(JSON.stringify(o));
+    });
     
   }
+
+ 
   
   return {
     render,
     handleAddNewBookmark,
+    handleFormSubmit
   };
 }());
