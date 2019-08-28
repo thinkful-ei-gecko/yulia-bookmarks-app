@@ -21,7 +21,7 @@ const bookmarks = (function(){
       <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
     }
     return `<li class="js-bookmark-item bookmark-item" data-bookmark-id="${item.id}"><span class="title">${item.title}</span>
-    <span class="rating">Rating is ${item.rating} out of 5</span>
+    <span class="rating">Rating: ${item.rating} star(s)</span>
     <p  class="js-desc hidden">${item.desc}<a href="${item.url}" target="_blank" class="js-visit">Visit Site</a></p>
     <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
   }
@@ -46,13 +46,14 @@ const bookmarks = (function(){
     console.log('`render` ran');
     if (store.filtered!=='ALL'){
       items = items.filter(item => item.rating >= store.filtered);
+
     }
     
     const bookmarkListItemsString = generateBookmarkList(items);
-      
     // insert that HTML into the DOM
     $('.js-bookmarks-list').html(bookmarkListItemsString);
   }
+
   
   function renderForm() {
     $('#add-bookmark').hide();
@@ -67,15 +68,15 @@ const bookmarks = (function(){
       <legend>Rating</legend>
       <fieldset>
         <label for="rating1"><label>
-        <input type="radio" class="fa fa-star" id="rating1" name="rating" value="1">
+        <input type="radio" id="rating1" name="rating" value="1">1 star</input>
         <label for="rating2"><label>
-        <input type="radio" class="fa fa-star" id="rating2" name="rating" value="2">
+        <input type="radio" id="rating2" name="rating" value="2">2 stars</input>
         <label for="rating3"><label>
-        <input type="radio" class="fa fa-star" id="rating3" name="rating" value="3">
+        <input type="radio" id="rating3" name="rating" value="3">3 stars</input>
         <label for="rating4"><label>
-        <input type="radio" class="fa fa-star" id="rating4" name="rating" value="4">
+        <input type="radio" id="rating4" name="rating" value="4">4 stars</input>
         <label for="rating5"><label>
-        <input type="radio" class="fa fa-star" id="rating5" name="rating" value="5">
+        <input type="radio" id="rating5" name="rating" value="5">5 stars</input>
       </fieldset>
       <input type="submit" value="Save bookmark">
     </form>
