@@ -1,6 +1,6 @@
 'use strict';
 
-/* global bookmarks */
+/* global  */
 
 const api = (function(){
   const base_url = 'https://thinkful-list-api.herokuapp.com/yulia/bookmarks';
@@ -31,9 +31,7 @@ const api = (function(){
   }
   
   const getBookmarks = function() {
-    return listApiFetch(base_url)
-    // .then(res => res.json());
-     
+    return listApiFetch(base_url);
   };
 
   const createBookmark = function(data) {
@@ -44,7 +42,6 @@ const api = (function(){
       },
       body: data
     });
-    //.then(res => res.json());
   };
 
   const deleteBookmark = function(id) {

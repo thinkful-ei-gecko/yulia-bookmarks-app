@@ -14,14 +14,8 @@ const bookmarks = (function(){
   }
 
   function generateBookmarkElement(item) {
-    if (!item.rating) {
-      return `<li class="js-bookmark-item bookmark-item" data-bookmark-id="${item.id}"><span class="title">${item.title}</span>
-      <span class="rating">This bookmark is not rated</span>
-      <p class="js-desc hidden">${item.desc}<a href="${item.url}" class="js-visit">Visit Site</a></p>
-      <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
-    }
     return `<li class="js-bookmark-item bookmark-item" data-bookmark-id="${item.id}"><span class="title">${item.title}</span>
-    <span class="rating">Rating: ${item.rating} star(s)</span>
+    <span class="rating">Rating: ${item.rating ? item.rating + " star(s)" : "This bookmark is not rated"} </span>
     <p  class="js-desc hidden">${item.desc}<a href="${item.url}" target="_blank" class="js-visit">Visit Site</a></p>
     <span class="delete-expand"><button class="delete-button">Delete</button><button class="expand">Details</button></span></li>`;
   }
@@ -40,13 +34,12 @@ const bookmarks = (function(){
     }
   }
 
-  function render() {
+  function renderList() {
     // render the shopping list in the DOM
     let items = [...store.list];
     console.log('`render` ran');
-    if (store.filtered!=='ALL'){
+    if (store.filtered !== 'ALL'){
       items = items.filter(item => item.rating >= store.filtered);
-
     }
     
     const bookmarkListItemsString = generateBookmarkList(items);
@@ -104,7 +97,7 @@ const bookmarks = (function(){
       api.createBookmark(JSON.stringify(o)).then((result) => {
         console.log(result);
         store.addBookmark(result);
-        render();
+        renderList();
         removeForm();
       })
         .catch((err) => {
@@ -126,7 +119,7 @@ const bookmarks = (function(){
       const id = getBookmarkIdFromElement(e.currentTarget);
       api.deleteBookmark(id).then(() => {
         store.findAndDelete(id);
-        render();
+        renderList();
       })
         .catch((err) => {
           console.log(err);
@@ -141,7 +134,7 @@ const bookmarks = (function(){
       let filterBy = $(e.currentTarget).val();
       console.log(filterBy);
       store.filtered=filterBy;
-      render();
+      renderList();
     });
   }
 
@@ -170,7 +163,7 @@ const bookmarks = (function(){
   
   
   return {
-    render,
+    renderList,
     bindEventListeners,
   };
 }());
