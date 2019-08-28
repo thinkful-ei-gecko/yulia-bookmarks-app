@@ -9,6 +9,7 @@ $(document).ready(function() {
     .then((items) => {
       console.log(`this is ${items}`);
       items.forEach((item) => store.addBookmark(item));
+      bookmarks.renderList();
       
     });
 });

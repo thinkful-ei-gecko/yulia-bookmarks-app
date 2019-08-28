@@ -1,6 +1,6 @@
 'use strict';
 
-/*global bookmarks */
+/*global */
 
 const store = (function(){
   const setError = function(error) {
@@ -9,7 +9,6 @@ const store = (function(){
 
   const addBookmark = function(item) {
     this.list.push(item);
-    bookmarks.render();
   };
  
   const findAndDelete = function(id) {
@@ -18,7 +17,7 @@ const store = (function(){
   
   return {
     list: [],
-    showError: '',
+    error: '',
     filtered: 'ALL',
 
     addBookmark,
