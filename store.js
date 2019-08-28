@@ -11,13 +11,7 @@ const store = (function(){
     this.list.push(item);
     bookmarks.render();
   };
-  // const findById = function(id) {
-  //   return this.list.find(item => item.id === id);
-  // };
-  // const findAndUpdate = function(id, newData) {
-  //   const bookmark = this.findById(id);
-  //   Object.assign(bookmark, newData);
-  // };
+ 
   const findAndDelete = function(id) {
     this.list = this.list.filter(item => item.id !== id);
   };

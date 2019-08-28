@@ -45,6 +45,10 @@ input[type=submit] {
   input[type=submit]:hover {
     background-color: #45a049;
   }
+
+  input[type=radio] {
+      margin: 5px;
+  }
   
 /* input[type=radio].fa {
     font-size: 120%;
